@@ -1,13 +1,24 @@
 package model;
 
-public class OutsideThermometer implements Runnable{
+import utility.observer.javaobserver.PropertyChangeSubject;
+import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
+
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
+public class OutsideThermometer implements Runnable,
+    UnnamedPropertyChangeSubject
+{
 
     private String id;
     private double t;
 
+    private PropertyChangeSupport property;
+
     public OutsideThermometer(double t){
         this.id = "Outside";
         this.t = t;
+        property = new PropertyChangeSupport(this);
     }
 
 
@@ -33,6 +44,7 @@ public class OutsideThermometer implements Runnable{
     public void run() {
         while (true){
             t=externalTemperature(t, -20,20);
+            property.firePropertyChange("outdoorTempChange", null, t);
             System.out.println(id + " " + t);
             try {
                 Thread.sleep(8000);
@@ -48,5 +60,15 @@ public class OutsideThermometer implements Runnable{
         Thread thread = new Thread(outsideThermometer, "Thermometer1");
 
         thread.start();
+    }
+
+    @Override public void addListener(PropertyChangeListener listener)
+    {
+        property.addPropertyChangeListener(listener);
+    }
+
+    @Override public void removeListener(PropertyChangeListener listener)
+    {
+        property.removePropertyChangeListener(listener);
     }
 }

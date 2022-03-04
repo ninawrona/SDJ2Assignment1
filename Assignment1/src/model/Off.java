@@ -10,7 +10,7 @@ public class Off implements HeaterState {
 
     @Override
     public void turnDown(Heater heater) {
-        //do nothing
+        throw new IllegalStateException("Off is the lowest setting!");
     }
 
     @Override

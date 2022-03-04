@@ -6,7 +6,7 @@ public class Max implements HeaterState{
 
     @Override
     public void turnUp(Heater heater) {
-        //do nothing
+        throw new IllegalStateException("Max is the highest setting!");
     }
 
     @Override

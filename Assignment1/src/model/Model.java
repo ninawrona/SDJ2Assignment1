@@ -5,7 +5,9 @@ import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 public interface Model extends UnnamedPropertyChangeSubject {
     public void turnUp();
     public void turnDown();
-    public double getTemperature();
+    public double getNearTemperature();
+    public double getFarTemperature();
+    public double getOutsideTemperature();
     public HeaterState getHeaterState();
-    public String status();
+   // public String status();
 }
