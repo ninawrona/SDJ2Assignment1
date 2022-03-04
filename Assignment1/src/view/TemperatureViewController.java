@@ -1,13 +1,17 @@
 package view;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import javafx.util.converter.DoubleStringConverter;
+import javafx.util.converter.IntegerStringConverter;
+import javafx.util.converter.NumberStringConverter;
 import viewModel.TemperatureViewModel;
 
 public class TemperatureViewController
 {
-  @FXML private Label outputTemp;
+  @FXML private Label outdoorTemp;
   @FXML private Label nearTemp;
   @FXML private Label farTemp;
   @FXML private Label errorLabel;
@@ -20,6 +24,11 @@ public class TemperatureViewController
     this.viewHandler = viewHandler;
     this.temperatureViewModel = temperatureViewModel;
     this.root = root;
+
+    errorLabel.textProperty().bind(temperatureViewModel.getErrorLabelProperty());
+    Bindings.bindBidirectional(farTemp.textProperty(), temperatureViewModel.getFarTempProperty(), new NumberStringConverter());
+    Bindings.bindBidirectional(nearTemp.textProperty(), temperatureViewModel.getNearTempProperty(), new NumberStringConverter());
+    Bindings.bindBidirectional(outdoorTemp.textProperty(), temperatureViewModel.getOutdoorTempProperty(), new NumberStringConverter());
   }
 
   public Region getRoot()
@@ -34,7 +43,7 @@ public class TemperatureViewController
 
   @FXML private void heaterButton()
   {
-      //
+      viewHandler.openView("Heater");
   }
 
 

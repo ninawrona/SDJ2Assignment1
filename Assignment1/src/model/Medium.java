@@ -3,8 +3,7 @@ package model;
 public class Medium implements HeaterState {
     @Override
     public void turnUp(Heater heater) {
-        heater.setState(new Max());
-        heater.timeout();
+        heater.setState(new Max(heater));
     }
 
     @Override
@@ -13,12 +12,8 @@ public class Medium implements HeaterState {
     }
 
     @Override
-    public String status(Heater heater) {
+    public String status() {
         return "Medium";
     }
 
-    @Override
-    public void timeout(Heater heater) {
-        //do nothing
-    }
 }

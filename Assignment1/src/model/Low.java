@@ -12,12 +12,8 @@ public class Low implements HeaterState{
     }
 
     @Override
-    public String status(Heater heater) {
+    public String status() {
         return "Low";
     }
 
-    @Override
-    public void timeout(Heater heater) {
-        //do nothing
-    }
 }

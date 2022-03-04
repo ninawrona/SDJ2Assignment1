@@ -22,6 +22,21 @@ public class ModelManager implements Model
     property = new PropertyChangeSupport(this);
   }
 
+  public Thermometer getNearThermometer()
+  {
+    return nearThermometer;
+  }
+
+  public Thermometer getFarThermometer()
+  {
+    return farThermometer;
+  }
+
+  public OutsideThermometer getOutsideThermometer()
+  {
+    return outsideThermometer;
+  }
+
   @Override public void turnUp()
   {
     heater.turnUp();

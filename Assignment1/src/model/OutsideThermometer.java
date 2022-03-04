@@ -44,7 +44,7 @@ public class OutsideThermometer implements Runnable,
     public void run() {
         while (true){
             t=externalTemperature(t, -20,20);
-            property.firePropertyChange("outdoorTempChange", null, t);
+            property.firePropertyChange("outdoorTempChange", 1, t);
             System.out.println(id + " " + t);
             try {
                 Thread.sleep(8000);

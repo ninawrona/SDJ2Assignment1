@@ -20,14 +20,10 @@ public class Heater {
     }
 
     public String status(){
-        return state.status(this);
+        return state.status();
     }
 
     public void setState(HeaterState state){
         this.state = state;
-    }
-
-    public void timeout(){
-        state.timeout(this);
     }
 }

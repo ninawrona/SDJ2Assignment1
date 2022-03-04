@@ -68,7 +68,6 @@ public class Thermometer implements Runnable, UnnamedPropertyChangeSubject
       }
       catch (InterruptedException e)
       {
-        //do nothing
       }
     }
   }

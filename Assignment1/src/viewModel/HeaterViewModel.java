@@ -3,6 +3,7 @@ package viewModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import model.HeaterState;
 import model.Model;
 
 import java.beans.PropertyChangeEvent;
@@ -20,7 +21,7 @@ public class HeaterViewModel implements PropertyChangeListener
     model.addListener(this);
 
     errorProperty = new SimpleStringProperty("");
-    stateProperty = new SimpleStringProperty(model.getHeaterState().toString());
+    stateProperty = new SimpleStringProperty(model.getHeaterState().status());
 
 
         /*
@@ -36,17 +37,43 @@ public class HeaterViewModel implements PropertyChangeListener
 
   public void turnUp()
   {
-    model.turnUp();
+    try
+    {
+      model.turnUp();
+
+    }
+    catch (IllegalStateException e)
+    {
+      errorProperty.set(e.getMessage());
+    }
   }
 
   public void turnDown()
   {
-    model.turnDown();
+    try
+    {
+      model.turnDown();
+    }
+    catch (IllegalStateException e)
+    {
+      errorProperty.set(e.getMessage());
+    }
+
   }
 
   public String getStatus()
   {
-    return model.getHeaterState().toString();
+    return model.getHeaterState().status();
+  }
+
+  public StringProperty getState()
+  {
+    return stateProperty;
+  }
+
+  public StringProperty getErrorProperty()
+  {
+    return errorProperty;
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

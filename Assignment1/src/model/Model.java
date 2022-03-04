@@ -9,5 +9,9 @@ public interface Model extends UnnamedPropertyChangeSubject {
     public double getFarTemperature();
     public double getOutsideTemperature();
     public HeaterState getHeaterState();
+    Thermometer getNearThermometer();
+    Thermometer getFarThermometer();
+    OutsideThermometer getOutsideThermometer();
+
    // public String status();
 }

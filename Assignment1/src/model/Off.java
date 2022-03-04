@@ -14,12 +14,8 @@ public class Off implements HeaterState {
     }
 
     @Override
-    public String status(Heater heater) {
+    public String status() {
         return "Off";
     }
 
-    @Override
-    public void timeout(Heater heater) {
-        //do nothing
-    }
 }

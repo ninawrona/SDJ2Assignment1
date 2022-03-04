@@ -19,13 +19,15 @@ public class TemperatureViewModel implements PropertyChangeListener {
 
     public TemperatureViewModel(Model model){
         this.model = model;
-        model.addListener(this);
+        model.getOutsideThermometer().addListener(this);
+        model.getNearThermometer().addListener(this);
+        model.getFarThermometer().addListener(this);
+        System.out.println("Added the listener");
 
-        outdoorTempProperty = new SimpleDoubleProperty();
+        outdoorTempProperty = new SimpleDoubleProperty(1);
         nearTempProperty = new SimpleDoubleProperty(model.getNearTemperature());
         farTempProperty = new SimpleDoubleProperty(model.getFarTemperature());
         errorLabelProperty = new SimpleStringProperty("");
-
     }
 
     public void reset(){
@@ -50,6 +52,7 @@ public class TemperatureViewModel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        System.out.println(evt.getNewValue());
         Platform.runLater(()-> {
             switch (evt.getPropertyName())
             {
@@ -57,10 +60,13 @@ public class TemperatureViewModel implements PropertyChangeListener {
                     nearTempProperty.set((Double) evt.getOldValue());
                     farTempProperty.set((Double) evt.getNewValue());
                     break;
+
                 case "outdoorTempChange":
                     outdoorTempProperty.set((Double) evt.getNewValue());
                     break;
             }
+
+            System.out.println("Went through property change");
 
         });
     }
