@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HeaterViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HeaterViewController">
     <children>
         <HBox alignment="CENTER" prefHeight="92.0" prefWidth="600.0">
             <children>
@@ -16,30 +19,54 @@
                 </Label>
             </children>
         </HBox>
-        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="324.0">
-            <children>
-                <Label fx:id="heaterState" text="Current State">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Label>
-            </children>
-        </HBox>
-        <HBox alignment="CENTER" prefHeight="73.0" prefWidth="600.0">
-            <children>
-                <Button mnemonicParsing="false" onAction="#turnDownButton" prefHeight="37.0" prefWidth="67.0" text="Down">
-                    <HBox.margin>
-                        <Insets right="20.0" />
-                    </HBox.margin>
-                </Button>
-                <Button mnemonicParsing="false" onAction="#turnUpButton" prefHeight="37.0" prefWidth="69.0" text="Up">
-                    <HBox.margin>
-                        <Insets left="20.0" />
-                    </HBox.margin>
-                </Button>
-            </children>
-        </HBox>
-        <HBox alignment="BOTTOM_RIGHT" prefHeight="95.0" prefWidth="600.0">
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="100.0" prefWidth="272.0">
+               <children>
+                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="324.0">
+                        <children>
+                            <Label fx:id="heaterState" text="Current State">
+                                <font>
+                                    <Font size="20.0" />
+                                </font>
+                            </Label>
+                        </children>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="73.0" prefWidth="600.0">
+                        <children>
+                            <Button mnemonicParsing="false" onAction="#turnDownButton" prefHeight="37.0" prefWidth="67.0" text="Down">
+                                <HBox.margin>
+                                    <Insets right="20.0" />
+                                </HBox.margin>
+                            </Button>
+                            <Button mnemonicParsing="false" onAction="#turnUpButton" prefHeight="37.0" prefWidth="69.0" text="Up">
+                                <HBox.margin>
+                                    <Insets left="20.0" />
+                                </HBox.margin>
+                            </Button>
+                        </children>
+                    </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <HBox prefHeight="52.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="64.0" prefWidth="60.0" text="Max temp: " />
+                        <TextArea fx:id="maxTempInput" prefHeight="49.0" prefWidth="139.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="191.0">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="148.0" text="Min temp: " />
+                        <TextArea fx:id="minTempInput" prefHeight="50.0" prefWidth="226.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+        <HBox alignment="BOTTOM_LEFT" prefHeight="122.0" prefWidth="474.0">
             <children>
                 <Label fx:id="errorLabel" prefHeight="29.0" prefWidth="251.0">
                     <HBox.margin>

@@ -31,6 +31,7 @@ public class Max implements HeaterState, UnnamedPropertyChangeSubject {
     }
     @Override
     public void turnUp(Heater heater) {
+        property.firePropertyChange("up", null, heater.getState().status());
         throw new IllegalStateException("Max is the highest setting!");
 
     }
@@ -39,7 +40,7 @@ public class Max implements HeaterState, UnnamedPropertyChangeSubject {
     public void turnDown(Heater heater) {
         t1.interrupt();
         heater.setState(new Medium());
-        property.firePropertyChange("down", null, heater.getState());
+        property.firePropertyChange("down", null, heater.getState().status());
     }
 
     @Override
