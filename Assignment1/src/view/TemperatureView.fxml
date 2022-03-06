@@ -60,6 +60,6 @@
                 <Button fx:id="heaterButton" alignment="CENTER" mnemonicParsing="false" onAction="#heaterButton" prefHeight="25.0" prefWidth="276.0" text="Heater" />
             </children>
         </HBox>
-        <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="213.0" />
+        <Label fx:id="errorLabel" prefHeight="16.0" prefWidth="345.0" />
     </children>
 </VBox>
