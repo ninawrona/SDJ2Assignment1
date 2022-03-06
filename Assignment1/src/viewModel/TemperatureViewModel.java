@@ -16,11 +16,15 @@ public class TemperatureViewModel implements PropertyChangeListener {
     private DoubleProperty outdoorTempProperty;
     private DoubleProperty nearTempProperty, farTempProperty;
     private StringProperty errorLabelProperty;
+    private double maxTemp;
+    private double minTemp;
     private Model model;
     public static final DecimalFormat df = new DecimalFormat("0.00");
 
     public TemperatureViewModel(Model model){
         this.model = model;
+        this.minTemp = 0;
+        this.maxTemp = 25;
         model.getOutsideThermometer().addListener(this);
         model.getNearThermometer().addListener(this);
         model.getFarThermometer().addListener(this);
@@ -30,6 +34,14 @@ public class TemperatureViewModel implements PropertyChangeListener {
         nearTempProperty = new SimpleDoubleProperty(model.getNearTemperature());
         farTempProperty = new SimpleDoubleProperty(model.getFarTemperature());
         errorLabelProperty = new SimpleStringProperty("");
+    }
+
+    public void setMinTemp(double min){
+        this.minTemp = min;
+    }
+
+    public void setMaxTemp(double max){
+        this.maxTemp = max;
     }
 
     public void reset(){
@@ -61,6 +73,14 @@ public class TemperatureViewModel implements PropertyChangeListener {
                 case "tempChange":
                     nearTempProperty.set(Double.parseDouble(df.format(evt.getOldValue())));
                     farTempProperty.set(Double.parseDouble(df.format(evt.getNewValue())));
+
+                    if (nearTempProperty.get() > maxTemp || farTempProperty.get()> maxTemp){
+                        errorLabelProperty.set("Your indoor temp is too is too high.");
+                    }
+                    else if(nearTempProperty.get() < minTemp || farTempProperty.get() < minTemp){
+                        errorLabelProperty.set("Your indoor temp is too is too small.");
+                    }
+
                     break;
 
                 case "outdoorTempChange":

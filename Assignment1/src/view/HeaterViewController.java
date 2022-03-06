@@ -3,12 +3,14 @@ package view;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import viewModel.HeaterViewModel;
 
+import java.util.Scanner;
+
 public class HeaterViewController
 {
-
   @FXML private Label heaterState;
   @FXML private Label errorLabel;
   private Region root;
@@ -23,7 +25,8 @@ public class HeaterViewController
     this.root = root;
 
     heaterState.textProperty().bindBidirectional(heaterViewModel.getState());
-    errorLabel.textProperty().bind(heaterViewModel.getErrorProperty());}
+    errorLabel.textProperty().bind(heaterViewModel.getErrorProperty());
+  }
 
   @FXML private void turnDownButton()
   {
@@ -49,4 +52,5 @@ public class HeaterViewController
   {
     heaterViewModel.reset();
   }
+
 }

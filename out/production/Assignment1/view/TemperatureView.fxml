@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="284.0" prefWidth="344.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TemperatureViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.0" prefWidth="464.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TemperatureViewController">
     <children>
         <HBox alignment="CENTER" prefHeight="40.0" prefWidth="486.0">
             <children>
@@ -22,42 +25,57 @@
                 <Insets top="8.0" />
             </VBox.margin>
         </HBox>
-        <HBox prefHeight="148.0" prefWidth="486.0">
+      <HBox prefHeight="158.0" prefWidth="464.0">
+         <children>
+              <HBox prefHeight="148.0" prefWidth="486.0">
+                  <children>
+                      <VBox prefHeight="148.0" prefWidth="30.0" />
+                      <VBox alignment="CENTER_RIGHT" prefHeight="148.0" prefWidth="298.0">
+                          <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="183.0">
+                                  <children>
+                                      <Label alignment="CENTER" contentDisplay="CENTER" text="Outdoot temperature: " />
+                                      <Label fx:id="outdoorTemp" prefHeight="28.0" prefWidth="44.0" text="0" />
+                                  </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="183.0">
+                                  <children>
+                                      <Label text="Indroor temperature (far): " />
+                                      <Label fx:id="farTemp" prefHeight="28.0" prefWidth="44.0" text="0" />
+                                  </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="29.0" prefWidth="183.0">
+                                  <children>
+                                      <Label alignment="CENTER_RIGHT" text="Indoor temperature (near heater):" />
+                                      <Label fx:id="nearTemp" alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="54.0" text="0" />
+                                  </children>
+                              </HBox>
+                          </children>
+                          <opaqueInsets>
+                              <Insets />
+                          </opaqueInsets>
+                      </VBox>
+                  </children>
+                  <opaqueInsets>
+                      <Insets />
+                  </opaqueInsets>
+              </HBox>
+            <VBox prefHeight="100.0" prefWidth="407.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="204.0" text="SET MIN AND MAX TEMPERATUES" />
+                  <TextArea fx:id="maxTemp" prefHeight="200.0" prefWidth="200.0" promptText="Max temperature" />
+                  <TextArea fx:id="minTemp" prefHeight="200.0" prefWidth="200.0" promptText="Min temperature" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+        <HBox alignment="CENTER" prefHeight="122.0" prefWidth="464.0">
             <children>
-                <VBox prefHeight="148.0" prefWidth="30.0" />
-                <VBox alignment="CENTER_RIGHT" prefHeight="148.0" prefWidth="298.0">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="183.0">
-                            <children>
-                                <Label alignment="CENTER" contentDisplay="CENTER" text="Outdoot temperature: " />
-                                <Label fx:id="outdoorTemp" prefHeight="28.0" prefWidth="44.0" text="0" />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="183.0">
-                            <children>
-                                <Label text="Indroor temperature (far): " />
-                                <Label fx:id="farTemp" prefHeight="28.0" prefWidth="44.0" text="0" />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="29.0" prefWidth="183.0">
-                            <children>
-                                <Label alignment="CENTER_RIGHT" text="Indoor temperature (near heater):" />
-                                <Label fx:id="nearTemp" alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="54.0" text="0" />
-                            </children>
-                        </HBox>
-                    </children>
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                </VBox>
-            </children>
-            <opaqueInsets>
-                <Insets />
-            </opaqueInsets>
-        </HBox>
-        <HBox alignment="CENTER" prefHeight="53.0" prefWidth="344.0">
-            <children>
-                <Button fx:id="heaterButton" alignment="CENTER" mnemonicParsing="false" onAction="#heaterButton" prefHeight="25.0" prefWidth="276.0" text="Heater" />
+                <Button fx:id="heaterButton" alignment="CENTER" mnemonicParsing="false" onAction="#heaterButton" prefHeight="25.0" prefWidth="276.0" text="Heater">
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin></Button>
+            <Button mnemonicParsing="false" onAction="#setTemperatures" text="Set temperatures" />
             </children>
         </HBox>
         <Label fx:id="errorLabel" prefHeight="16.0" prefWidth="345.0" />
