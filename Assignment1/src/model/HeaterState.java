@@ -1,8 +1,14 @@
 package model;
 
-public interface HeaterState {
-    public void turnUp(Heater heater);
-    public void turnDown(Heater heater);
-    public String status();
-    //public void timeout();
+import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
+
+import java.beans.PropertyChangeListener;
+
+public interface HeaterState extends UnnamedPropertyChangeSubject
+{
+  void turnUp(Heater heater);
+  void turnDown(Heater heater);
+  String status();
+  @Override void addListener(PropertyChangeListener listener);
+  @Override void removeListener(PropertyChangeListener listener);
 }

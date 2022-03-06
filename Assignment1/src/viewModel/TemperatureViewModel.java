@@ -58,12 +58,12 @@ public class TemperatureViewModel implements PropertyChangeListener {
                 case "tempChange":
                     nearTempProperty.set((Double) evt.getOldValue());
                     farTempProperty.set((Double) evt.getNewValue());
-                    System.out.println("INDOOR CHANGE");
+                    //System.out.println("INDOOR CHANGE");
                     break;
 
                 case "outdoorTempChange":
                     outdoorTempProperty.set((Double) evt.getNewValue());
-                    System.out.println("OUTDOOR CHANGE");
+                    //System.out.println("OUTDOOR CHANGE");
                     break;
             }
 
