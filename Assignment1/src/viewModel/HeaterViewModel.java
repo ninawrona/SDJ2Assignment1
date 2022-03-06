@@ -80,17 +80,6 @@ public class HeaterViewModel implements PropertyChangeListener
   {
     Platform.runLater(() -> {
       stateProperty.set(getStatus());
-      /*
-      switch (evt.getPropertyName())
-      {
-        case "up":
-          stateProperty.set(getStatus());
-          break;
-        case "down":
-          stateProperty.set(getStatus());
-          break;
-      }
-       */
     });
   }
 }

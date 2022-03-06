@@ -25,7 +25,7 @@
         <HBox prefHeight="148.0" prefWidth="486.0">
             <children>
                 <VBox prefHeight="148.0" prefWidth="30.0" />
-                <VBox alignment="CENTER_RIGHT" prefHeight="148.0" prefWidth="238.0">
+                <VBox alignment="CENTER_RIGHT" prefHeight="148.0" prefWidth="298.0">
                     <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="183.0">
                             <children>

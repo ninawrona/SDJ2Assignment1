@@ -16,7 +16,7 @@
                 </Label>
             </children>
         </HBox>
-        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0">
+        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="324.0">
             <children>
                 <Label fx:id="heaterState" text="Current State">
                     <font>
