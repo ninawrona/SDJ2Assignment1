@@ -5,6 +5,8 @@ import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class OutsideThermometer implements Runnable,
     UnnamedPropertyChangeSubject
@@ -37,6 +39,9 @@ public class OutsideThermometer implements Runnable,
     }
 
     public double getOutsideTemp(){
+
+        BigDecimal outsideBD = new BigDecimal(t).setScale(2, RoundingMode.HALF_UP);
+        t = outsideBD.doubleValue();
         return t;
     }
 
@@ -44,8 +49,8 @@ public class OutsideThermometer implements Runnable,
     public void run() {
         while (true){
             t=externalTemperature(t, -20,20);
-            property.firePropertyChange("outdoorTempChange", 1, t);
-            System.out.println(id + " " + t);
+            property.firePropertyChange("outdoorTempChange", 1, getOutsideTemp());
+            //System.out.println(id + " " + t); TODO
             try {
                 Thread.sleep(8000);
             }
@@ -53,13 +58,6 @@ public class OutsideThermometer implements Runnable,
                 //do nothing
             }
         }
-    }
-
-    public static void main(String[] args) {
-        OutsideThermometer outsideThermometer = new OutsideThermometer(15);
-        Thread thread = new Thread(outsideThermometer, "Thermometer1");
-
-        thread.start();
     }
 
     @Override public void addListener(PropertyChangeListener listener)
@@ -71,4 +69,14 @@ public class OutsideThermometer implements Runnable,
     {
         property.removePropertyChangeListener(listener);
     }
+
+    /* USED FOR TESTING
+    public static void main(String[] args) {
+        OutsideThermometer outsideThermometer = new OutsideThermometer(15);
+        Thread thread = new Thread(outsideThermometer, "Thermometer1");
+
+        thread.start();
+    }
+
+     */
 }

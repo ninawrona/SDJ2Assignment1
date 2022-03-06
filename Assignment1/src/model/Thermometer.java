@@ -5,6 +5,8 @@ import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Thermometer implements Runnable, UnnamedPropertyChangeSubject
 {
@@ -59,9 +61,9 @@ public class Thermometer implements Runnable, UnnamedPropertyChangeSubject
     {
       tNear = temperature(tNear, p, 1, t0, 6);
       tFar = temperature(tFar, p, 7, t0, 6);
-      property.firePropertyChange("tempChange", tNear, tFar);
-      System.out.println(idNear + " " + tNear);
-      System.out.println(idFar + " " + tFar);
+      property.firePropertyChange("tempChange", getNear(), getFar());
+      //System.out.println(idNear + " " + tNear); TODO
+      //System.out.println(idFar + " " + tFar); TODO
       try
       {
         Thread.sleep(4000);
@@ -74,11 +76,15 @@ public class Thermometer implements Runnable, UnnamedPropertyChangeSubject
 
   public double getNear()
   {
+    BigDecimal nearBD = new BigDecimal(tNear).setScale(2, RoundingMode.HALF_UP);
+    tNear = nearBD.doubleValue();
     return tNear;
   }
 
   public double getFar()
   {
+    BigDecimal farBD = new BigDecimal(tFar).setScale(2, RoundingMode.HALF_UP);
+    tFar = farBD.doubleValue();
     return tFar;
   }
 
@@ -101,6 +107,17 @@ public class Thermometer implements Runnable, UnnamedPropertyChangeSubject
     }
   }
 
+  @Override public void addListener(PropertyChangeListener listener)
+  {
+    property.addPropertyChangeListener(listener);
+  }
+
+  @Override public void removeListener(PropertyChangeListener listener)
+  {
+    property.removePropertyChangeListener(listener);
+  }
+
+/* USED FOR TESTING
   public static void main(String[] args)
   {
     OutsideThermometer outsideThermometer = new OutsideThermometer(15);
@@ -113,13 +130,5 @@ public class Thermometer implements Runnable, UnnamedPropertyChangeSubject
     thread2.start();
   }
 
-  @Override public void addListener(PropertyChangeListener listener)
-  {
-    property.addPropertyChangeListener(listener);
-  }
-
-  @Override public void removeListener(PropertyChangeListener listener)
-  {
-    property.removePropertyChangeListener(listener);
-  }
+ */
 }
