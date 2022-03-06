@@ -60,8 +60,8 @@ public class Thermometer implements Runnable, UnnamedPropertyChangeSubject
       tNear = temperature(tNear, p, 1, t0, 6);
       tFar = temperature(tFar, p, 7, t0, 6);
       property.firePropertyChange("tempChange", tNear, tFar);
-      System.out.println(idNear + " " + tNear);
-      System.out.println(idFar + " " + tFar);
+      //System.out.println(idNear + " " + tNear);
+      //System.out.println(idFar + " " + tFar);
       try
       {
         Thread.sleep(4000);

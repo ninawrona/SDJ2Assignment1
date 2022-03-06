@@ -10,12 +10,14 @@ import model.Model;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.SimpleBeanInfo;
+import java.text.DecimalFormat;
 
 public class TemperatureViewModel implements PropertyChangeListener {
     private DoubleProperty outdoorTempProperty;
     private DoubleProperty nearTempProperty, farTempProperty;
     private StringProperty errorLabelProperty;
     private Model model;
+    public static final DecimalFormat df = new DecimalFormat("0.00");
 
     public TemperatureViewModel(Model model){
         this.model = model;
@@ -24,7 +26,7 @@ public class TemperatureViewModel implements PropertyChangeListener {
         model.getFarThermometer().addListener(this);
         System.out.println("Added the listener");
 
-        outdoorTempProperty = new SimpleDoubleProperty(1);
+        outdoorTempProperty = new SimpleDoubleProperty(model.getOutsideTemperature());
         nearTempProperty = new SimpleDoubleProperty(model.getNearTemperature());
         farTempProperty = new SimpleDoubleProperty(model.getFarTemperature());
         errorLabelProperty = new SimpleStringProperty("");
@@ -57,16 +59,17 @@ public class TemperatureViewModel implements PropertyChangeListener {
             switch (evt.getPropertyName())
             {
                 case "tempChange":
-                    nearTempProperty.set((Double) evt.getOldValue());
-                    farTempProperty.set((Double) evt.getNewValue());
+                    nearTempProperty.set(Double.parseDouble(df.format(evt.getOldValue())));
+                    farTempProperty.set(Double.parseDouble(df.format(evt.getNewValue())));
                     break;
 
                 case "outdoorTempChange":
-                    outdoorTempProperty.set((Double) evt.getNewValue());
+                    System.out.println("got it");
+                    outdoorTempProperty.set(Double.parseDouble(df.format(evt.getNewValue())));
                     break;
             }
 
-            System.out.println("Went through property change");
+            //System.out.println("Went through property change");
 
         });
     }

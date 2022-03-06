@@ -30,7 +30,7 @@
                         <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="183.0">
                             <children>
                                 <Label alignment="CENTER" contentDisplay="CENTER" text="Outdoot temperature: " />
-                                <Label fx:id="outputTemp" prefHeight="28.0" prefWidth="44.0" text="0" />
+                                <Label fx:id="outdoorTemp" prefHeight="28.0" prefWidth="44.0" text="0" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="183.0">
