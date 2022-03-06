@@ -7,8 +7,7 @@
     </content>
     <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="MyObserver-1.4" level="application" />
-    <orderEntry type="library" name="JavaFX17" level="application" />
     <orderEntry type="library" name="JavaFX11" level="application" />
+    <orderEntry type="library" name="MyObserver-1.4" level="application" />
   </component>
 </module>

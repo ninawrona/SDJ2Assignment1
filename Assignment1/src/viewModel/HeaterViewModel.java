@@ -72,6 +72,7 @@ public class HeaterViewModel implements PropertyChangeListener
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
+
     Platform.runLater(() -> {
       model.getHeaterState().addListener(this);
       stateProperty.set(getStatus());

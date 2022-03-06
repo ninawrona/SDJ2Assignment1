@@ -13,7 +13,7 @@ public class MyApplication extends Application
   {
     OutsideThermometer outsideThermometer = new OutsideThermometer(15);
     Thread thread1 = new Thread(outsideThermometer, "Thermometer1");
-    Thermometer thermometer = new Thermometer(15, 2,
+    Thermometer thermometer = new Thermometer(15, 0,
         outsideThermometer.getOutsideTemp());
     Thread thread2 = new Thread(thermometer, "Thermometer1");
 

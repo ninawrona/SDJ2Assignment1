@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HeaterViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HeaterViewController">
     <children>
         <HBox alignment="CENTER" prefHeight="92.0" prefWidth="600.0">
             <children>
@@ -49,7 +48,7 @@
                         <Insets bottom="30.0" right="60.0" />
                     </HBox.margin>
                 </Label>
-                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goBackButton" prefHeight="35.0" prefWidth="68.0" text="Button">
+                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goBackButton" prefHeight="35.0" prefWidth="68.0" text="Go Back">
                     <HBox.margin>
                         <Insets bottom="27.0" right="70.0" />
                     </HBox.margin>

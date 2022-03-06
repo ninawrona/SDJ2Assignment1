@@ -1,6 +1,5 @@
 package model;
 
-import utility.observer.javaobserver.PropertyChangeSubject;
 import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 
 import java.beans.PropertyChangeListener;
@@ -12,14 +11,14 @@ public class OutsideThermometer implements Runnable,
     UnnamedPropertyChangeSubject
 {
 
-    private String id;
-    private double t;
+    //private String id;
+    private double temperature;
 
     private PropertyChangeSupport property;
 
-    public OutsideThermometer(double t){
-        this.id = "Outside";
-        this.t = t;
+    public OutsideThermometer(double temperature){
+      //  this.id = "Outside";
+        this.temperature = temperature;
         property = new PropertyChangeSupport(this);
     }
 
@@ -40,15 +39,15 @@ public class OutsideThermometer implements Runnable,
 
     public double getOutsideTemp(){
 
-        BigDecimal outsideBD = new BigDecimal(t).setScale(2, RoundingMode.HALF_UP);
-        t = outsideBD.doubleValue();
-        return t;
+        BigDecimal outsideBD = new BigDecimal(temperature).setScale(2, RoundingMode.HALF_UP);
+        temperature = outsideBD.doubleValue();
+        return temperature;
     }
 
     @Override
     public void run() {
         while (true){
-            t=externalTemperature(t, -20,20);
+            temperature =externalTemperature(temperature, -20,20);
             property.firePropertyChange("outdoorTempChange", 1, getOutsideTemp());
             //System.out.println(id + " " + t); TODO
             try {

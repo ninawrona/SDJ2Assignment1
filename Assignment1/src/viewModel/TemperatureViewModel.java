@@ -9,66 +9,97 @@ import model.Model;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.beans.SimpleBeanInfo;
 
-public class TemperatureViewModel implements PropertyChangeListener {
-    private DoubleProperty outdoorTempProperty;
-    private DoubleProperty nearTempProperty, farTempProperty;
-    private StringProperty errorLabelProperty;
-    private Model model;
+public class TemperatureViewModel implements PropertyChangeListener
+{
+  private DoubleProperty outdoorTempProperty;
+  private DoubleProperty nearTempProperty, farTempProperty;
+  private StringProperty errorLabelProperty;
+  private double minTemperature, maxTemperature;
+  private Model model;
 
-    public TemperatureViewModel(Model model){
-        this.model = model;
-        model.getOutsideThermometer().addListener(this);
-        model.getNearThermometer().addListener(this);
-        model.getFarThermometer().addListener(this);
+  public TemperatureViewModel(Model model)
+  {
+    this.model = model;
+    model.getOutsideThermometer().addListener(this);
+    model.getNearThermometer().addListener(this);
+    model.getFarThermometer().addListener(this);
 
-        outdoorTempProperty = new SimpleDoubleProperty(1);
-        nearTempProperty = new SimpleDoubleProperty(model.getNearTemperature());
-        farTempProperty = new SimpleDoubleProperty(model.getFarTemperature());
-        errorLabelProperty = new SimpleStringProperty("");
-    }
+    this.maxTemperature = 999;
+    this.minTemperature = -999;
 
-    public void reset(){
-        errorLabelProperty.set("");
-    }
+    outdoorTempProperty = new SimpleDoubleProperty(1);
+    nearTempProperty = new SimpleDoubleProperty(model.getNearTemperature());
+    farTempProperty = new SimpleDoubleProperty(model.getFarTemperature());
+    errorLabelProperty = new SimpleStringProperty("");
+  }
 
-    public DoubleProperty getOutdoorTempProperty() {
-        return outdoorTempProperty;
-    }
+  public void reset()
+  {
+    errorLabelProperty.set("");
+  }
 
-    public DoubleProperty getNearTempProperty() {
-        return nearTempProperty;
-    }
+  public void setMinTemperature(double minTemperature)
+  {
+    this.minTemperature = minTemperature;
+  }
 
-    public DoubleProperty getFarTempProperty() {
-        return farTempProperty;
-    }
+  public void setMaxTemperature(double maxTemperature)
+  {
+    this.maxTemperature = maxTemperature;
+  }
 
-    public StringProperty getErrorLabelProperty(){
-        return errorLabelProperty;
-    }
+  public DoubleProperty getOutdoorTempProperty()
+  {
+    return outdoorTempProperty;
+  }
 
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        //System.out.println(evt.getNewValue());
-        Platform.runLater(()-> {
-            switch (evt.getPropertyName())
-            {
-                case "tempChange":
-                    nearTempProperty.set((Double) evt.getOldValue());
-                    farTempProperty.set((Double) evt.getNewValue());
-                    //System.out.println("INDOOR CHANGE");
-                    break;
+  public DoubleProperty getNearTempProperty()
+  {
+    return nearTempProperty;
+  }
 
-                case "outdoorTempChange":
-                    outdoorTempProperty.set((Double) evt.getNewValue());
-                    //System.out.println("OUTDOOR CHANGE");
-                    break;
-            }
+  public DoubleProperty getFarTempProperty()
+  {
+    return farTempProperty;
+  }
 
+  public StringProperty getErrorLabelProperty()
+  {
+    return errorLabelProperty;
+  }
 
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    Platform.runLater(() -> {
+      switch (evt.getPropertyName())
+      {
+        case "tempChange":
+          nearTempProperty.set((Double) evt.getOldValue());
+          farTempProperty.set((Double) evt.getNewValue());
+          break;
 
-        });
-    }
+        case "outdoorTempChange":
+          outdoorTempProperty.set((Double) evt.getNewValue());
+          break;
+      }
+      if (maxTemperature < nearTempProperty.get())
+      {
+        errorLabelProperty.set("WARNING: 'NEAR' is too high");
+      }
+      else if (maxTemperature < farTempProperty.get())
+      {
+        errorLabelProperty.set("WARNING:'FAR' is too high");
+      }
+
+      else if (minTemperature > nearTempProperty.get())
+      {
+        errorLabelProperty.set("WARNING:'NEAR' is too low");
+      }
+      else if (minTemperature > farTempProperty.get())
+      {
+        errorLabelProperty.set("WARNING:'FAR' is too low");
+      }
+    });
+  }
 }

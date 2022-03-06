@@ -7,19 +7,16 @@ import static java.lang.Thread.sleep;
 
 public class Max implements HeaterState{
     private Thread t1;
-    private Heater heater;
     private PropertyChangeSupport property;
 
 
     public Max(Heater heater)
     {
         this.property = new PropertyChangeSupport(this);
-        this.heater = heater;
         t1 = new Thread(() ->{
             try {
-                System.out.println("doing the thread");
                 sleep(5000);
-                heater.setState(new Medium());
+                heater.turnDown();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

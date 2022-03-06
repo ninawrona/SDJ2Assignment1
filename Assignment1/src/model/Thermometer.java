@@ -1,6 +1,5 @@
 package model;
 
-import utility.observer.javaobserver.PropertyChangeSubject;
 import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 
 import java.beans.PropertyChangeListener;
@@ -15,8 +14,8 @@ public class Thermometer implements Runnable, UnnamedPropertyChangeSubject
   private String idFar;
   private double tNear;
   private double tFar;
-  private int p; //p - power
-  private double t0; //-outsideTemperature
+  private int powerLevel; //powerLevel - power
+  private double outsideTemp; //-outsideTemperature
   private PropertyChangeSupport property;
 
   public Thermometer(double t, int power, double outsideTemp)
@@ -25,18 +24,19 @@ public class Thermometer implements Runnable, UnnamedPropertyChangeSubject
     this.idFar = "Far";
     this.tNear = t;
     this.tFar = t;
-    this.p = power;
-    this.t0 = outsideTemp;
+    this.powerLevel = power;
+    this.outsideTemp = outsideTemp;
     property = new PropertyChangeSupport(this);
   }
 
   /*** Calculating the internal temperature in one of two locations.
-   * *This includes a term from a heater (depending on location and *
+   * *This includes a term from a heater (depending on location and
    * heaters power), and a term from an outdoor heat loss.* Values are only valid in the outdoor temperature range [-20; 20]*
    * and when s, the number of seconds between each measurements are* between 4 and 8 seconds.**
-   * @param t  the last measured temperature* @param p  the heaters power {0, 1, 2 or 3} where 0 is turned off, *
+   * @param t  the last measured temperature*
+   * @param p  the heaters power {0, 1, 2 or 3} where 0 is turned off, *
    * 1 is low, 2 is medium and 3 is high* @param d  the distance between heater andmeasurements {1 or 7}*
-   * where 1 is close to the heater and 7 is in theopposite corner* @param t0 the outdoor temperature (valid in the range [-20; 20])*
+   * where 1 is close to the heater and 7 is in theopposite corner* @param outsideTemp the outdoor temperature (valid in the range [-20; 20])*
    * @param s the number of seconds since last measurement[4; 8]*
    * @return the temperature
    * */
@@ -59,11 +59,9 @@ public class Thermometer implements Runnable, UnnamedPropertyChangeSubject
   {
     while (true)
     {
-      tNear = temperature(tNear, p, 1, t0, 6);
-      tFar = temperature(tFar, p, 7, t0, 6);
+      tNear = temperature(tNear, powerLevel, 1, outsideTemp, 6);
+      tFar = temperature(tFar, powerLevel, 7, outsideTemp, 6);
       property.firePropertyChange("tempChange", getNear(), getFar());
-      //System.out.println(idNear + " " + tNear); TODO
-      //System.out.println(idFar + " " + tFar); TODO
       try
       {
         Thread.sleep(4000);
@@ -90,19 +88,19 @@ public class Thermometer implements Runnable, UnnamedPropertyChangeSubject
 
   public void setHeaterLevel(HeaterState heaterState)
   {
-    switch (heaterState.toString())
+    switch (heaterState.status())
     {
       case "Off":
-        p = 0;
+        powerLevel = 0;
         break;
       case "Low":
-        p = 1;
+        powerLevel = 1;
         break;
       case "Medium":
-        p = 2;
+        powerLevel = 2;
         break;
       case "Max":
-        p = 3;
+        powerLevel = 3;
         break;
     }
   }

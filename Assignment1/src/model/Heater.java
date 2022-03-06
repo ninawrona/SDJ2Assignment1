@@ -19,10 +19,6 @@ public class Heater {
         state.turnDown(this);
     }
 
-    public String status(){
-        return state.status();
-    }
-
     public void setState(HeaterState state){
         this.state = state;
     }
