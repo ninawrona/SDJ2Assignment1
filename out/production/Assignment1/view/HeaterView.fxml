@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HeaterViewController">
     <children>
         <HBox alignment="CENTER" prefHeight="92.0" prefWidth="600.0">
@@ -19,41 +18,53 @@
                 </Label>
             </children>
         </HBox>
-        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0">
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="100.0" prefWidth="485.0">
+               <children>
+                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="324.0">
+                        <children>
+                            <Label fx:id="heaterState" text="Current State">
+                                <font>
+                                    <Font size="20.0" />
+                                </font>
+                            </Label>
+                        </children>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="73.0" prefWidth="600.0">
+                        <children>
+                            <Button mnemonicParsing="false" onAction="#turnDownButton" prefHeight="37.0" prefWidth="67.0" text="Down">
+                                <HBox.margin>
+                                    <Insets right="20.0" />
+                                </HBox.margin>
+                            </Button>
+                            <Button mnemonicParsing="false" onAction="#turnUpButton" prefHeight="37.0" prefWidth="69.0" text="Up">
+                                <HBox.margin>
+                                    <Insets left="20.0" />
+                                </HBox.margin>
+                            </Button>
+                        </children>
+                    </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+        <HBox alignment="BOTTOM_LEFT" prefHeight="122.0" prefWidth="474.0">
             <children>
-                <Label fx:id="heaterState" text="Current State">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Label>
-            </children>
-        </HBox>
-        <HBox alignment="CENTER" prefHeight="73.0" prefWidth="600.0">
-            <children>
-                <Button mnemonicParsing="false" onAction="#turnDownButton" prefHeight="37.0" prefWidth="67.0" text="Down">
-                    <HBox.margin>
-                        <Insets right="20.0" />
-                    </HBox.margin>
-                </Button>
-                <Button mnemonicParsing="false" onAction="#turnUpButton" prefHeight="37.0" prefWidth="69.0" text="Up">
-                    <HBox.margin>
-                        <Insets left="20.0" />
-                    </HBox.margin>
-                </Button>
-            </children>
-        </HBox>
-        <HBox alignment="BOTTOM_RIGHT" prefHeight="95.0" prefWidth="600.0">
-            <children>
-                <Label fx:id="errorLabel" prefHeight="29.0" prefWidth="251.0">
-                    <HBox.margin>
-                        <Insets bottom="30.0" right="60.0" />
-                    </HBox.margin>
-                </Label>
-                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goBackButton" prefHeight="35.0" prefWidth="68.0" text="Button">
-                    <HBox.margin>
-                        <Insets bottom="27.0" right="70.0" />
-                    </HBox.margin>
-                </Button>
+            <VBox prefHeight="122.0" prefWidth="521.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="95.0" prefWidth="165.0">
+                     <children>
+                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goBackButton" prefHeight="35.0" prefWidth="120.0" text="Go back">
+                                <HBox.margin>
+                                    <Insets />
+                                </HBox.margin>
+                            </Button>
+                     </children>
+                  </HBox>
+                      <Label fx:id="errorLabel" prefHeight="28.0" prefWidth="480.0" />
+               </children>
+            </VBox>
             </children>
         </HBox>
     </children>

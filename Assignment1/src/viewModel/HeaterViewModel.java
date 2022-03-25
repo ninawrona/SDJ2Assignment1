@@ -18,16 +18,10 @@ public class HeaterViewModel implements PropertyChangeListener
   public HeaterViewModel(Model model)
   {
     this.model = model;
-    model.addListener(this);
+    model.getHeaterState().addListener(this);
 
     errorProperty = new SimpleStringProperty("");
     stateProperty = new SimpleStringProperty(model.getHeaterState().status());
-
-
-        /*
-        errorProperty.set("");
-        stateProperty.set(model.getHeaterState().toString());
-         */
   }
 
   public void reset()
@@ -79,18 +73,8 @@ public class HeaterViewModel implements PropertyChangeListener
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
     Platform.runLater(() -> {
+      model.getHeaterState().addListener(this);
       stateProperty.set(getStatus());
-      /*
-      switch (evt.getPropertyName())
-      {
-        case "up":
-          stateProperty.set(getStatus());
-          break;
-        case "down":
-          stateProperty.set(getStatus());
-          break;
-      }
-       */
     });
   }
 }

@@ -9,7 +9,7 @@ public class ModelManager implements Model
   private OutsideThermometer outsideThermometer;
   private Thermometer farThermometer;
   private Heater heater;
-  private PropertyChangeSupport property;
+
 
   public ModelManager(Thermometer nearThermometer, Thermometer farThermometer,
       OutsideThermometer outsideThermometer)
@@ -19,7 +19,6 @@ public class ModelManager implements Model
     this.outsideThermometer = outsideThermometer;
 
     heater = new Heater();
-    property = new PropertyChangeSupport(this);
   }
 
   public Thermometer getNearThermometer()
@@ -42,7 +41,6 @@ public class ModelManager implements Model
     heater.turnUp();
     nearThermometer.setHeaterLevel(getHeaterState());
     farThermometer.setHeaterLevel(getHeaterState());
-    property.firePropertyChange("up", null, getHeaterState());
   }
 
   @Override public void turnDown()
@@ -50,7 +48,6 @@ public class ModelManager implements Model
     heater.turnDown();
     nearThermometer.setHeaterLevel(getHeaterState());
     farThermometer.setHeaterLevel(getHeaterState());
-    property.firePropertyChange("down", null, getHeaterState());
   }
 
   @Override public double getFarTemperature()
@@ -73,13 +70,5 @@ public class ModelManager implements Model
     return heater.getState();
   }
 
-  @Override public void addListener(PropertyChangeListener listener)
-  {
-    property.addPropertyChangeListener(listener);
-  }
 
-  @Override public void removeListener(PropertyChangeListener listener)
-  {
-    property.removePropertyChangeListener(listener);
-  }
 }
